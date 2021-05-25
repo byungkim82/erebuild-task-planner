@@ -1,1 +1,1 @@
-# erebuild-task-planner
+# erebuild-taskplanner-allocating
