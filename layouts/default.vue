@@ -1,64 +1,42 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
+  <v-app>
     <v-main>
-      <v-container>
-        <nuxt />
+      <v-container fluid>
+        <v-system-bar window dark :color="systemBar.color">
+          <v-icon color="white">{{ systemBar.icon }}</v-icon>
+          <span class="white--text font-weight-medium mr-2">{{
+            systemBar.title
+          }}</span>
+        </v-system-bar>
+        <v-tabs
+          v-model="currentTab"
+          height="32"
+          centered
+          fixed-tabs
+          :background-color="tabColor"
+        >
+          <v-tab
+            v-for="(tab, index) in tabs"
+            :key="'tab-' + index"
+            :nuxt="true"
+            :to="tab.to"
+            style="font-size: 11px"
+            >{{ index > 0 ? `${index}:` : '' }} {{ tab.name }}</v-tab
+          >
+        </v-tabs>
+        <v-tabs-items v-model="currentTab">
+          <v-tab-item
+            v-for="(tab, index) in tabs"
+            :key="'tabItem-' + index"
+            :value="tab.to"
+          >
+            <v-card>
+              <nuxt keep-alive></nuxt>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -66,25 +44,35 @@
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
+      tabs: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          name: 'Overview',
           to: '/',
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          name: 'Space Needed',
+          to: '/space-needed',
+        },
+        {
+          name: 'Space Provided',
+          to: '/space-provided',
+        },
+        {
+          name: 'Space Comparison',
+          to: '/space-comparison',
+        },
+        {
+          name: 'Practice',
+          to: '/allocating-practice',
         },
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
+      currentTab: 0,
+      tabColor: 'light-blue lighten-4',
+      systemBar: {
+        color: 'light-blue',
+        icon: 'mdi-home-group',
+        title: 'Allocating',
+      },
     }
   },
 }
