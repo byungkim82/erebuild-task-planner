@@ -47,23 +47,23 @@ export default {
       tabs: [
         {
           name: 'Overview',
-          to: '/',
+          to: `/`,
         },
         {
           name: 'Space Needed',
-          to: '/space-needed',
+          to: `/space-needed`,
         },
         {
           name: 'Space Provided',
-          to: '/space-provided',
+          to: `/space-provided`,
         },
         {
           name: 'Space Comparison',
-          to: '/space-comparison',
+          to: `/space-comparison`,
         },
         {
           name: 'Practice',
-          to: '/allocating-practice',
+          to: `/allocating-practice`,
         },
       ],
       currentTab: 0,
@@ -75,5 +75,6 @@ export default {
       },
     }
   },
+  computed: {},
 }
 </script>

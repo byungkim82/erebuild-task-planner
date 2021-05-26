@@ -1,7 +1,12 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  // Target: https://go.nuxtjs.dev/config-target
+  // router: {
+  //   base: `/${this.$route.params.level}/${this.$route.params.competency}/`,
+  // },
+  // Generate: https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
+  // generate: {},
+  // // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
