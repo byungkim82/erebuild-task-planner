@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <v-container fluid>
+      <v-container fluid class="py-0 px-0">
         <v-system-bar window dark :color="systemBar.color">
           <v-icon color="white">{{ systemBar.icon }}</v-icon>
           <span class="white--text font-weight-medium mr-2">{{
