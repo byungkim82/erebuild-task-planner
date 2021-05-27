@@ -4,7 +4,7 @@
       <v-col cols="6" class="pr-0">
         <div v-for="(occupant, index) in occupants" :key="occupant.name">
           <v-btn class="my-2 mx-1" x-large :color="colors[index]">
-            <v-avatar class="mr-3" :color="colors[index] + ' lighten-3'">
+            <v-avatar class="mr-3" :color="colors[index] + ' lighten-2'">
               <img :src="occupant.properties.url" :alt="occupant.name" />
             </v-avatar>
             {{ occupant.name }}
