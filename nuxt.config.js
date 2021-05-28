@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import config from './configs/index.js'
 
 export default {
   // router: {
@@ -21,18 +22,26 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;600;700;800;900&display=swap',
+      },
+      ...config.icons.map((href) => ({ rel: 'stylesheet', href })),
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['~/assets/scss/theme.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~plugins/plural.js',
-    '~plugins/capitalize.js',
-    '~plugins/lowercase.js',
-    '~plugins/uppercase.js',
+    { src: '~/filters/capitalize.js' },
+    { src: '~/filters/lowercase.js' },
+    { src: '~/filters/uppercase.js' },
+    { src: '~/filters/trim.js' },
+    { src: '~/filters/placeholder.js' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -57,7 +66,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/scss/vuetify/variables/_index.scss'],
     theme: {
       dark: false,
       themes: {
