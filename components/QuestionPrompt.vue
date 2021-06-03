@@ -11,6 +11,9 @@
         {{ activator.title }}
       </v-btn>
     </template>
+    <template v-else #activator="{ on, attrs }">
+      <slot name="activator" :on="on" :attrs="attrs"></slot>
+    </template>
     <v-card>
       <v-card-title
         class="py-2 subtitle-1 text--secondary light-blue lighten-4"
@@ -42,7 +45,7 @@
                 </v-text-field>
               </template>
               <template v-else-if="inputType === 'radio'">
-                <v-radio-group v-model="userInput">
+                <v-radio-group v-model="userInput" :disabled="completed">
                   <v-radio
                     v-for="(item, index) in choices"
                     :key="'radio-' + index"
@@ -120,7 +123,7 @@ export default {
     activator: {
       type: Object,
       default() {
-        return { color: 'primary', title: 'Read More' }
+        return undefined
       },
     },
     question: {

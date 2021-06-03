@@ -10,7 +10,7 @@
         </v-system-bar>
         <v-tabs
           v-model="currentTab"
-          height="32"
+          height="48"
           centered
           fixed-tabs
           :background-color="tabColor"
@@ -21,8 +21,12 @@
             :nuxt="true"
             :to="tab.to"
             style="font-size: 11px"
-            >{{ index > 0 ? `${index}:` : '' }} {{ tab.name }}</v-tab
-          >
+            >{{ index > 0 ? `${index}:` : '' }} {{ tab.name }}
+            <v-badge
+              :color="tab.checked ? 'primary' : ''"
+              :icon="tab.checked ? 'mdi-check' : ''"
+            ></v-badge>
+          </v-tab>
         </v-tabs>
         <v-tabs-items v-model="currentTab">
           <v-tab-item
@@ -44,28 +48,6 @@
 export default {
   data() {
     return {
-      tabs: [
-        {
-          name: 'Overview',
-          to: `/`,
-        },
-        {
-          name: 'Space Needed',
-          to: `/space-needed`,
-        },
-        {
-          name: 'Space Provided',
-          to: `/space-provided`,
-        },
-        {
-          name: 'Space Comparison',
-          to: `/space-comparison`,
-        },
-        {
-          name: 'Practice',
-          to: `/allocating-practice`,
-        },
-      ],
       currentTab: 0,
       tabColor: 'light-blue lighten-4',
       systemBar: {
@@ -75,6 +57,10 @@ export default {
       },
     }
   },
-  computed: {},
+  computed: {
+    tabs() {
+      return this.$store.state.phases
+    },
+  },
 }
 </script>
